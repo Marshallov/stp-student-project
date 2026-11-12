@@ -1,0 +1,5 @@
+com/example/student/OtherComponentsTest.class
+com/example/student/service/impl/StudentServiceImplTest.class
+com/example/student/security/JwtServiceAndFilterTest.class
+com/example/student/mapper/MapperAndControllerTest.class
+com/example/student/service/impl/UserServiceImplTest.class

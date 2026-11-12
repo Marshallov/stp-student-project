@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StudentController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report"></a> &gt; <a href="index.source.html" class="el_package">com.example.student.controller</a> &gt; <span class="el_source">StudentController.java</span></div><h1>StudentController.java</h1><pre class="source lang-java linenums">package com.example.student.controller;
+
+import com.example.student.dto.*;
+import com.example.student.service.StudentService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/api/v1/student&quot;)
+<span class="fc" id="L13">@Slf4j</span>
+public class StudentController {
+    private final StudentService studentService;
+
+    @GetMapping
+    @PreAuthorize(&quot;hasAnyRole('ADMIN', 'TEACHER')&quot;)
+    public StudentResponseList findAll() {
+<span class="fc" id="L20">        return studentService.findAll();</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    @PreAuthorize(&quot;hasAnyRole('ADMIN', 'TEACHER')&quot;)
+    public StudentFullResponse findStudentById(@PathVariable Long id) {
+<span class="fc" id="L26">        return studentService.findById(id);</span>
+    }
+
+    @GetMapping(&quot;info/{id}&quot;)
+    @PreAuthorize(&quot;hasAnyRole('ADMIN', 'TEACHER')&quot;)
+    public StudentFullResponse getFullInfoById(@PathVariable Long id) {
+<span class="fc" id="L32">        return studentService.findById(id);</span>
+    }
+
+    @PostMapping(&quot;/save&quot;)
+    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+    public StudentResponse createStudent(@RequestBody StudentRequest studentRequest) {
+<span class="fc" id="L38">        return studentService.save(studentRequest);</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+    public StudentResponse updateStudent(@PathVariable Long id, @RequestBody StudentUpdateRequest request) {
+<span class="fc" id="L44">        return studentService.update(id, request);</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+    public void deleteStudentById(@PathVariable Long id) {
+<span class="fc" id="L50">        studentService.deleteById(id);</span>
+<span class="fc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
