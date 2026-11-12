@@ -8,11 +8,12 @@ spring:
     name: student
   jpa:
     hibernate.ddl-auto: update
+    properties:
+      hibernate.default_schema: ${SPRING_DATASOURCE_SCHEMA:students_schema}
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/students_db}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:students_db;DB_CLOSE_DELAY=-1}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     hikari:
-      schema: ${SPRING_DATASOURCE_SCHEMA:students_schema}
       connection-init-sql: CREATE SCHEMA IF NOT EXISTS students_schema;
       connection-timeout: ${SPRING_DATASOURCE_CONNECTION_TIMEOUT:10000}
